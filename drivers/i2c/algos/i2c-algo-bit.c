@@ -186,7 +186,7 @@ static int i2c_outb(struct i2c_adapter *i2c_adap, unsigned char c)
 	 * NAK (usually to report problems with the data we wrote).
 	 * Report ACK if SDA is write-only.
 	 */
-	ack = !adap->getsda || !getsda(adap); /* ack: sda is pulled low -> success */
+	ack = !adap->getsda || !getsda(adap);    /* ack: sda is pulled low -> success */
 	bit_dbg(2, &i2c_adap->dev, "i2c_outb: 0x%02x %s\n", (int)c,
 		ack ? "A" : "NA");
 
@@ -682,7 +682,6 @@ static int __i2c_bit_add_bus(struct i2c_adapter *adap,
 		dev_info(&adap->dev, "I2C-like interface, SDA and SCL are write-only\n");
 	else if (bit_adap->getscl == NULL) {
 		/* Complain if SCL can't be read */
-		if (bit_adap->getscl == NULL) {
 		dev_warn(&adap->dev, "Not I2C compliant: can't read SCL\n");
 		dev_warn(&adap->dev, "Bus may be unreliable\n");
 	}
